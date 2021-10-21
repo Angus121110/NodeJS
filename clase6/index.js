@@ -5,11 +5,14 @@ const port = process.env.PORT || 8080;
 const fs = require ("fs")
 let readFile = fs.readFileSync("./products.txt" , "utf-8", (err, data) => {
     if(err) throw "Error al leer"
-    let prodList = JSON.parse(data)
-    return prodList
+    //let prodList = JSON.parse(data, null, 2)
+    return data
 });
-let serverProducts = readFile
-let itemRandom = serverProducts[Math.floor(Math.random()*serverProducts.length)]
+let serverProducts = JSON.parse(readFile, null, 2)
+
+function itemRandom(min, max) {
+    return serverProducts[Math.floor(Math.random() * (max - min)) + min];
+}
 
 
 app.listen(8080, () => {
@@ -28,5 +31,5 @@ app.get("/products" , (req, res) => {
 //RUTA prodRandom, devuelve un producto al azar entre todos los disponibles.
 
 app.get("/productRandom" , (req, res) => {
-    res.send(itemRandom);
+    res.send(itemRandom(0, serverProducts.length));
 })
