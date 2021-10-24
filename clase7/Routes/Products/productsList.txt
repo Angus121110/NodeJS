@@ -1,7 +1,0 @@
-[
-    {
-    "tittle": "heladera",
-    "price": "58000",
-    "thumbnail": "net heladera"
-    }
-]
