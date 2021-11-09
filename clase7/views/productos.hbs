@@ -1,0 +1,23 @@
+{{> nav}}
+
+<div>
+         <h1>Hi, i'm Products</h1>
+
+         <ul>
+             {{#each data}}
+                <div class="card" style="width: 18rem;">
+                <img src={{this.img}} class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{this.tittle}}</h5>
+                    <p class="card-text">
+                        <li>${{this.price}}</li>
+                        <li>Id Number: {{this.id}}</li> 
+                    
+                    </p>
+                    
+                </div>
+            </div>
+                {{/each}}
+         </ul>
+    <a href="/">Go to Main</a>
+</div>

@@ -8,9 +8,13 @@ let productsList = require( "./productsList.js")
 
 //Rutas de productos
     //Obtener todos los productos
-router.get("/products", (req, res) => {
+router.get("/productsList", (req, res) => {
     res.send({data : productsList})
 })
+router.get("/", (req, res)  => {
+    res.send("Bienvenido a la api")
+})
+
     //Obtener un producto segun ID
 router.get("/products/:id", (req, res) => {
     let index = productsList.findIndex( x=> {
@@ -25,12 +29,13 @@ router.get("/products/:id", (req, res) => {
     //Agregar producto y asignar ID, luego lo muestra
 router.post("/addProduct", (req, res) => {
     let obj = {
-        tittle: req.body.tittle,
-        price: req.body.price,
-        id : productsList.length+1
+        tittle: req.body.formTittle,
+        price: req.body.formPrice,
+        id : productsList.length+1,
+        img: req.body.formImgLink
     }
     productsList.push(obj);
-    res.send("Producto agregado")
+    res.render("main")
 })
     //Segun su ID, actualiza un producto
 router.put("/actProduct/:id", (req, res) => {
@@ -62,15 +67,6 @@ router.delete("/delProduct/:id", (req, res) => {
     
 })
 
-        //Agregar mediante formulario
-router.post("/addProductForm", (req, res) => {
-    let obj = {
-        tittle: req.body.tittle,
-        price: req.body.price,
-        id : productsList.length+1
-    }
-    productsList.push(obj);
-    res.send("Producto agregado con formulario")
-})
+
 
 module.exports = router
